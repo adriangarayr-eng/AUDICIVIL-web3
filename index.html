@@ -256,7 +256,7 @@
   <script>
     // ═══════════════ CONFIGURACIÓN ═══════════════
     const IMGBB_API_KEY = '36dfe0461ab6fa19530066bfd3d87379';      // ← Cambiar
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwB7QJiW1XTQy_eh10PRStdEPjba64FeXXss7G-XX0eEcz4PHWU9E6qRPsO9g12MmRT/exec'; // ← Cambiar
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyU8sdzqCtUVMMh2MDUyqBgiikRLtawYF4FBew5pWK5f5v8DG3MLhoVjQkeKpMQ-X24/exec'; // ← Cambiar
     // ════════════════════════════════════════════
 
     let eventos = [];
@@ -265,12 +265,13 @@
     async function cargarEventos() {
       try {
         const res = await fetch(`${APPS_SCRIPT_URL}?action=read`);
+        if (!res.ok) throw new Error('Error del servidor');
         const data = await res.json();
         eventos = Array.isArray(data) ? data : [];
         renderizar();
       } catch (err) {
         console.error(err);
-        mostrarToast('Error al cargar eventos', 'error');
+        mostrarToast('No se pudieron cargar los eventos', 'error');
       }
     }
 
